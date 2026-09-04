@@ -95,14 +95,15 @@ void test('Turkish dictionary builds a temporary one-screen personal entrypoint'
   ]);
   assert.equal(content.contact.email, 'mk@mustafakalkanli.com');
   assert.doesNotMatch(index, /Digital Forensics|data-i18n|language-button/);
-  assert.match(index, /<script src="script\.js\?v=8" defer><\/script>/);
-  assert.match(index, /href="styles\.css\?v=8"/);
+  assert.match(index, /<script src="script\.js\?v=9" defer><\/script>/);
+  assert.match(index, /href="styles\.css\?v=9"/);
   assert.doesNotMatch(index, /<h1|id="hero-title"/);
   assert.match(index, /Siber Güvenlik[\s\S]*Bilgi Güvenliği[\s\S]*Adli Bilişim/);
   assert.doesNotMatch(index, /Siber Güvenlik Yönetimi ve Stratejisi/);
   assert.doesNotMatch(index, /<nav|id="yaklasim"|id="uzmanlik"|id="ilkeler"|id="iletisim"|decision-trace|value-strip|service-grid|scenario-grid|engagement-steps/);
   assert.match(index, /href="mailto:mk@mustafakalkanli\.com"/);
   assert.match(index, /<footer class="site-footer">[\s\S]*href="mailto:mk@mustafakalkanli\.com"[\s\S]*<\/footer>/);
+  assert.match(index, /© 2026 Mustafa Kalkanlı/);
   assert.doesNotMatch(index, /<section[^>]*class="profile-card"[\s\S]*class="email-link"[\s\S]*<\/section>/);
   assert.match(css, /@media \(max-width: 700px\)/);
   assert.equal(cname.trim(), 'mustafakalkanli.com');
@@ -139,7 +140,7 @@ void test('temporary profile keeps the restrained responsive visual system', asy
   assert.match(css, /\.expertise-menu summary\s*\{\s*display:\s*none;/);
   assert.match(css, /@media \(max-width: 700px\)[\s\S]*\.expertise-menu summary\s*\{[^}]*display:\s*flex;/);
   assert.match(index, /href="#main-content"/);
-  assert.match(index, /<script src="script\.js\?v=8" defer><\/script>/);
+  assert.match(index, /<script src="script\.js\?v=9" defer><\/script>/);
   assert.equal(content.profile.areas.length, 3);
   assert.match(script, /is-scrolled/);
   assert.match(script, /is-visible/);

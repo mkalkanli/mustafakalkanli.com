@@ -27,5 +27,9 @@
   "contact": {
     "email": "mk@mustafakalkanli.com",
     "emailLabel": "E-posta gönder"
+  },
+  "footer": {
+    "copyright": "© 2026 Mustafa Kalkanlı",
+    "separator": "·"
   }
 }
