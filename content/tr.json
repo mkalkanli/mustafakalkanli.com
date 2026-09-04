@@ -6,7 +6,7 @@
     "description": "Mustafa Kalkanlı'nın kişisel çalışma alanı.",
     "canonicalUrl": "https://mustafakalkanli.com/",
     "robots": "noindex, nofollow, noarchive",
-    "themeColor": "#0B1E32",
+    "themeColor": "#0a0a0a",
     "siteName": "Mustafa Kalkanlı",
     "openGraphType": "website",
     "schema": {
@@ -15,13 +15,13 @@
       "name": "Mustafa Kalkanlı",
       "url": "https://mustafakalkanli.com/",
       "sameAs": ["https://github.com/mkalkanli"],
-      "knowsAbout": ["Siber Güvenlik", "Bilgi Güvenliği", "Siber Güvenlik Yönetimi ve Stratejisi", "Adli Bilişim"]
+      "knowsAbout": ["Siber Güvenlik", "Bilgi Güvenliği", "Adli Bilişim"]
     }
   },
   "profile": {
     "skipLink": "Ana içeriğe geç",
     "name": "Mustafa Kalkanlı",
-    "areas": ["Siber Güvenlik", "Bilgi Güvenliği", "Siber Güvenlik Yönetimi ve Stratejisi", "Adli Bilişim"]
+    "areas": ["Siber Güvenlik", "Bilgi Güvenliği", "Adli Bilişim"]
   },
   "contact": {
     "email": "mk@mustafakalkanli.com",

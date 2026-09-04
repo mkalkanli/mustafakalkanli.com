@@ -60,8 +60,8 @@ const validateContent = (content) => {
     throw new Error('The profile name must be Mustafa Kalkanlı.');
   }
 
-  if (!Array.isArray(content.profile.areas) || content.profile.areas.length !== 4) {
-    throw new Error('The temporary profile must define four areas.');
+  if (!Array.isArray(content.profile.areas) || content.profile.areas.length !== 3) {
+    throw new Error('The temporary profile must define three areas.');
   }
 };
 
