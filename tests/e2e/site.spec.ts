@@ -1,10 +1,16 @@
 import { expect, test, type Page } from '@playwright/test';
 
-const focusByTabbing = async (page: Page, name: RegExp | string) => {
+const EFFECTIVELY_DISABLED_MOTION_MS = 0.05;
+
+const focusByTabbing = async (
+  page: Page,
+  name: RegExp | string,
+  advanceKey: 'Tab' | 'Alt+Tab' = 'Tab',
+) => {
   const target = page.getByRole('link', { name });
 
   for (let index = 0; index < 12; index += 1) {
-    await page.keyboard.press('Tab');
+    await page.keyboard.press(advanceKey);
     if (await target.evaluate((element) => element === document.activeElement)) {
       return target;
     }
@@ -37,10 +43,27 @@ const getHorizontalOverflow = async (page: Page) =>
     };
   });
 
+const parseDurationMs = (value: string) =>
+  value
+    .split(',')
+    .map((entry) => entry.trim())
+    .filter(Boolean)
+    .map((entry) => {
+      if (entry.endsWith('ms')) return Number.parseFloat(entry);
+      if (entry.endsWith('s')) return Number.parseFloat(entry) * 1000;
+      return Number.parseFloat(entry);
+    });
+
+const waitForStablePage = async (page: Page) => {
+  await page.waitForLoadState('domcontentloaded');
+  await page.waitForFunction(() => document.readyState === 'complete');
+};
+
 test('renders a Turkish-only advisory page with non-indexable contact paths', async ({
   page,
 }) => {
   await page.goto('/');
+  await waitForStablePage(page);
 
   await expect(page).toHaveTitle(/Mustafa Kalkanlı/);
   await expect(page.locator('html')).toHaveAttribute('lang', 'tr');
@@ -67,10 +90,13 @@ test('renders a Turkish-only advisory page with non-indexable contact paths', as
 
 test('supports keyboard navigation with visible focus states and skip navigation', async ({
   page,
+  browserName,
 }) => {
   await page.goto('/');
+  await waitForStablePage(page);
 
-  const skipLink = await focusByTabbing(page, 'Ana içeriğe geç');
+  const advanceKey = browserName === 'webkit' ? 'Alt+Tab' : 'Tab';
+  const skipLink = await focusByTabbing(page, 'Ana içeriğe geç', advanceKey);
   await expect(skipLink).toBeFocused();
 
   const skipLinkStyles = await skipLink.evaluate((element) => {
@@ -89,7 +115,11 @@ test('supports keyboard navigation with visible focus states and skip navigation
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#main-content$/);
 
-  const primaryCta = await focusByTabbing(page, /danışmanlık için iletişime geçin/i);
+  const primaryCta = await focusByTabbing(
+    page,
+    /danışmanlık için iletişime geçin/i,
+    advanceKey,
+  );
   await expect(primaryCta).toBeFocused();
 
   const primaryCtaStyles = await primaryCta.evaluate((element) => {
@@ -108,12 +138,13 @@ test('respects reduced-motion preferences without leaving reveal content hidden'
   page,
 }, testInfo) => {
   test.skip(
-    !testInfo.project.name.startsWith('reduced-motion'),
+    !testInfo.project.name.includes('reduced-motion'),
     'Reduced-motion assertions run only in the reduced-motion project.',
   );
 
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
+  await waitForStablePage(page);
 
   const htmlState = await page.locator('html').evaluate(() => {
     return {
@@ -145,10 +176,25 @@ test('respects reduced-motion preferences without leaving reveal content hidden'
         item.transform === 'matrix(1, 0, 0, 1, 0, 0)',
     ),
   ).toBe(true);
+  expect(
+    revealStates.every((item) =>
+      parseDurationMs(item.transitionDuration).every(
+        (duration) => duration <= EFFECTIVELY_DISABLED_MOTION_MS,
+      ),
+    ),
+  ).toBe(true);
+  expect(
+    revealStates.every((item) =>
+      parseDurationMs(item.animationDuration).every(
+        (duration) => duration <= EFFECTIVELY_DISABLED_MOTION_MS,
+      ),
+    ),
+  ).toBe(true);
 });
 
 test('does not introduce horizontal overflow', async ({ page }) => {
   await page.goto('/');
+  await waitForStablePage(page);
 
   const overflow = await getHorizontalOverflow(page);
 
