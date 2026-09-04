@@ -13,8 +13,8 @@
     <meta property="og:title" content="{{meta.title}}" />
     <meta property="og:description" content="{{meta.description}}" />
     <meta name="theme-color" content="{{meta.themeColor}}" />
-    <link rel="stylesheet" href="styles.css?v=4" />
-    <script src="script.js?v=4" defer></script>
+    <link rel="stylesheet" href="styles.css?v=5" />
+    <script src="script.js?v=5" defer></script>
     <script type="application/ld+json">{{meta.schemaJson}}</script>
   </head>
   <body>
@@ -22,13 +22,18 @@
     <main id="main-content">
       <section id="top" class="profile-card" aria-label="{{profile.name}}" data-reveal>
         <img class="security-art" src="cybersecurity-shield-v4.png" alt="" width="1024" height="1536" />
-        <ul aria-label="{{profile.name}}">
-          <li>{{profile.areas.0}}</li>
-          <li>{{profile.areas.1}}</li>
-          <li>{{profile.areas.2}}</li>
-        </ul>
-        <a class="email-link" href="mailto:{{contact.email}}" aria-label="{{contact.emailLabel}}">{{contact.email}}</a>
+        <details class="expertise-menu">
+          <summary>{{profile.menuLabel}}</summary>
+          <ul aria-label="{{profile.menuLabel}}">
+            <li>{{profile.areas.0}}</li>
+            <li>{{profile.areas.1}}</li>
+            <li>{{profile.areas.2}}</li>
+          </ul>
+        </details>
       </section>
     </main>
+    <footer class="site-footer">
+      <a class="email-link" href="mailto:{{contact.email}}" aria-label="{{contact.emailLabel}}">{{contact.email}}</a>
+    </footer>
   </body>
 </html>
