@@ -95,8 +95,8 @@ void test('Turkish dictionary builds a temporary one-screen personal entrypoint'
   ]);
   assert.equal(content.contact.email, 'mk@mustafakalkanli.com');
   assert.doesNotMatch(index, /Digital Forensics|data-i18n|language-button/);
-  assert.match(index, /<script src="script\.js\?v=3" defer><\/script>/);
-  assert.match(index, /href="styles\.css\?v=3"/);
+  assert.match(index, /<script src="script\.js\?v=4" defer><\/script>/);
+  assert.match(index, /href="styles\.css\?v=4"/);
   assert.doesNotMatch(index, /<h1|id="hero-title"/);
   assert.match(index, /Siber Güvenlik[\s\S]*Bilgi Güvenliği[\s\S]*Adli Bilişim/);
   assert.doesNotMatch(index, /Siber Güvenlik Yönetimi ve Stratejisi/);
@@ -133,7 +133,7 @@ void test('temporary profile keeps the restrained responsive visual system', asy
   assert.match(css, /@media \(max-width: 700px\)[^{]*\{[\s\S]*\.profile-card ul\s*\{[^}]*position:\s*static;/);
   assert.match(index, /class="security-art"[^>]*src="cybersecurity-shield-v4\.png"/);
   assert.match(index, /href="#main-content"/);
-  assert.match(index, /<script src="script\.js\?v=3" defer><\/script>/);
+  assert.match(index, /<script src="script\.js\?v=4" defer><\/script>/);
   assert.equal(content.profile.areas.length, 3);
   assert.match(script, /is-scrolled/);
   assert.match(script, /is-visible/);
