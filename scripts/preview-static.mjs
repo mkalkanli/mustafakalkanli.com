@@ -1,6 +1,13 @@
 import { createServer } from 'node:http';
-import { access, readFile } from 'node:fs/promises';
-import { dirname, extname, isAbsolute, relative, resolve } from 'node:path';
+import { access, readFile, realpath } from 'node:fs/promises';
+import {
+  dirname,
+  extname,
+  isAbsolute,
+  relative,
+  resolve,
+  sep,
+} from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -18,6 +25,16 @@ export const contentTypeForPath = (assetPath) =>
   contentTypes.get(extname(assetPath).toLowerCase()) ??
   'application/octet-stream';
 
+const isOutsideDirectory = (directory, candidate) => {
+  const candidateRelativePath = relative(directory, candidate);
+
+  return (
+    candidateRelativePath === '..' ||
+    candidateRelativePath.startsWith(`..${sep}`) ||
+    isAbsolute(candidateRelativePath)
+  );
+};
+
 export const resolveAssetPath = async (distDir, requestPath) => {
   const pathname = decodeURIComponent(requestPath.split('?')[0] ?? '/');
   const requestedPath =
@@ -25,17 +42,22 @@ export const resolveAssetPath = async (distDir, requestPath) => {
       ? 'index.html'
       : pathname.replace(/^\/+/, '');
   const assetPath = resolve(distDir, requestedPath);
-  const assetRelativePath = relative(distDir, assetPath);
 
-  if (
-    assetRelativePath.startsWith('..') ||
-    isAbsolute(assetRelativePath)
-  ) {
+  if (isOutsideDirectory(distDir, assetPath)) {
     throw new Error('Requested asset resolves outside the dist directory.');
   }
 
   await access(assetPath);
-  return assetPath;
+
+  const [realDistDir, realAssetPath] = await Promise.all([
+    realpath(distDir),
+    realpath(assetPath),
+  ]);
+  if (isOutsideDirectory(realDistDir, realAssetPath)) {
+    throw new Error('Requested asset resolves outside the dist directory.');
+  }
+
+  return realAssetPath;
 };
 
 export const createStaticPreviewServer = ({ distDir = defaultDistDir } = {}) =>
@@ -102,6 +124,9 @@ const startStaticPreview = async () => {
   console.log(`Static preview ready at http://${host}:${port}/`);
 };
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
+if (
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === resolve(process.argv[1])
+) {
   await startStaticPreview();
 }
