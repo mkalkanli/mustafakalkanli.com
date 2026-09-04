@@ -16,7 +16,7 @@ a:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
 .profile-card ul { width: 100%; display: grid; grid-template-columns: repeat(3, auto); justify-content: end; gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
 .profile-card li { padding: 0.85rem 0; border-bottom: 1px solid var(--line); color: var(--quiet); font-family: var(--mono); font-size: clamp(0.9rem, 1.8vw, 1rem); letter-spacing: 0.02em; }
 .profile-card li:last-child { color: var(--ink); }
-.site-footer { width: min(84rem, calc(100% - 4rem)); min-height: 5rem; display: flex; align-items: center; gap: 0.65rem; margin-inline: auto; border-top: 1px solid var(--line); color: var(--quiet); font-family: var(--mono); font-size: 0.78rem; }
+.site-footer { width: min(84rem, calc(100% - 4rem)); min-height: 5rem; display: flex; align-items: center; justify-content: center; gap: 0.65rem; margin-inline: auto; border-top: 1px solid var(--line); color: var(--quiet); font-family: var(--mono); font-size: 0.78rem; text-align: center; }
 .footer-separator { color: var(--line); }
 .email-link { min-height: 44px; display: inline-flex; align-items: center; color: var(--quiet); font-size: inherit; font-weight: 500; text-decoration: none; }
 .email-link:hover { color: var(--cobalt); }
