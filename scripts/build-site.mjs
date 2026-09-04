@@ -106,7 +106,7 @@ const run = async () => {
     ['script.js', 'script.js'],
     ['robots.txt', 'robots.txt'],
     ['public/favicon.svg', 'favicon.svg'],
-    ['public/cybersecurity-shield-v3.png', 'cybersecurity-shield-v3.png'],
+    ['cybersecurity-shield-v3.png', 'cybersecurity-shield-v3.png'],
   ];
 
   await rm(dist, { recursive: true, force: true });
