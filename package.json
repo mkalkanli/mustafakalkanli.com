@@ -14,7 +14,7 @@
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=0 playwright test",
     "test:e2e:install": "PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium firefox webkit",
-    "start": "wrangler dev --config dist/server/wrangler.json",
+    "start": "npm run build:static && node scripts/preview-static.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },

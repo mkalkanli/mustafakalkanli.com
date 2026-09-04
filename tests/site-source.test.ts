@@ -67,6 +67,10 @@ void test('default project commands use the canonical static dictionary site', a
     packageJson.scripts['dev:static'],
     'vite --host 127.0.0.1 --port 4173',
   );
+  assert.equal(
+    packageJson.scripts.start,
+    'npm run build:static && node scripts/preview-static.mjs',
+  );
 });
 
 void test('Turkish dictionary builds a non-indexable advisory entrypoint', async () => {
