@@ -7,16 +7,8 @@ const mode = process.argv[2];
 
 const requiredSections = [
   'meta',
-  'navigation',
-  'hero',
-  'valueStrip',
-  'services',
-  'scenarios',
-  'approach',
-  'forensics',
-  'principles',
+  'profile',
   'contact',
-  'footer',
 ];
 
 export const escapeHtml = (value) =>
@@ -60,16 +52,16 @@ const validateContent = (content) => {
     throw new Error('The first release must use Turkish content and document language.');
   }
 
-  if (content.forensics.title !== 'Adli Bilişim') {
-    throw new Error('The secondary expertise title must be Adli Bilişim.');
-  }
-
   if (content.contact.email !== 'mk@mustafakalkanli.com') {
     throw new Error('The contact email must be mk@mustafakalkanli.com.');
   }
 
-  if (!Array.isArray(content.services.items) || content.services.items.length !== 4) {
-    throw new Error('The site must define four primary service areas.');
+  if (content.profile.name !== 'Mustafa Kalkanlı') {
+    throw new Error('The profile name must be Mustafa Kalkanlı.');
+  }
+
+  if (!Array.isArray(content.profile.areas) || content.profile.areas.length !== 4) {
+    throw new Error('The temporary profile must define four areas.');
   }
 };
 

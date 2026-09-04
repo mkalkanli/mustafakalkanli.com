@@ -59,7 +59,7 @@ const waitForStablePage = async (page: Page) => {
   await page.waitForFunction(() => document.readyState === 'complete');
 };
 
-test('renders a Turkish-only advisory page with non-indexable contact paths', async ({
+test('renders a Turkish-only one-screen personal entrypoint with non-indexable contact paths', async ({
   page,
 }) => {
   await page.goto('/');
@@ -71,19 +71,21 @@ test('renders a Turkish-only advisory page with non-indexable contact paths', as
     'content',
     'noindex, nofollow, noarchive',
   );
-  await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'Siber riski',
-  );
-  await expect(page.getByRole('heading', { name: 'Adli Bilişim' })).toBeVisible();
-  await expect(page.getByRole('link', { name: /danışmanlık/i }).first()).toHaveAttribute(
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mustafa Kalkanlı');
+  await expect(page.getByText('Siber Güvenlik', { exact: true })).toBeVisible();
+  await expect(page.getByText('Bilgi Güvenliği', { exact: true })).toBeVisible();
+  await expect(page.getByText('Siber Güvenlik Yönetimi ve Stratejisi', { exact: true })).toBeVisible();
+  await expect(page.getByText('Adli Bilişim', { exact: true })).toBeVisible();
+  await expect(page.locator('main > section')).toHaveCount(1);
+  await expect(page.locator('nav, #yaklasim, #uzmanlik, #ilkeler, #iletisim, .decision-trace, .value-strip, .service-grid, .scenario-grid, .engagement-steps')).toHaveCount(0);
+  await expect(page.getByRole('link', { name: /e-posta gönder/i })).toHaveAttribute(
     'href',
     'mailto:mk@mustafakalkanli.com',
   );
-  await expect(
-    page.getByRole('link', {
-      name: 'mk@mustafakalkanli.com adresine e-posta gönderin',
-    }),
-  ).toHaveAttribute('href', 'mailto:mk@mustafakalkanli.com');
+  await expect(page.getByRole('link', { name: 'E-posta gönder' })).toHaveAttribute(
+    'href',
+    'mailto:mk@mustafakalkanli.com',
+  );
   await expect(page.locator('body')).not.toContainText('Digital Forensics');
   await expect(page.locator('body')).not.toContainText('English');
 });
@@ -117,7 +119,7 @@ test('supports keyboard navigation with visible focus states and skip navigation
 
   const primaryCta = await focusByTabbing(
     page,
-    /danışmanlık için iletişime geçin/i,
+    /e-posta gönder/i,
     advanceKey,
   );
   await expect(primaryCta).toBeFocused();

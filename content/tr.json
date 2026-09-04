@@ -2,8 +2,8 @@
   "meta": {
     "locale": "tr",
     "documentLanguage": "tr",
-    "title": "Mustafa Kalkanlı | Siber Güvenlik Yönetimi ve Stratejisi",
-    "description": "Siber riskleri yönetişim, dayanıklılık ve kanıt odağında yönetilebilir kararlara dönüştürmeye yönelik danışmanlık yaklaşımı.",
+    "title": "Mustafa Kalkanlı",
+    "description": "Mustafa Kalkanlı'nın kişisel çalışma alanı.",
     "canonicalUrl": "https://mustafakalkanli.com/",
     "robots": "noindex, nofollow, noarchive",
     "themeColor": "#0B1E32",
@@ -15,169 +15,16 @@
       "name": "Mustafa Kalkanlı",
       "url": "https://mustafakalkanli.com/",
       "sameAs": ["https://github.com/mkalkanli"],
-      "knowsAbout": [
-        "Siber Güvenlik Yönetimi ve Stratejisi",
-        "Yönetişim, Risk ve Yönetim Raporlaması",
-        "Siber Dayanıklılık ve Olay Hazırlığı",
-        "Adli Bilişim"
-      ]
+      "knowsAbout": ["Siber Güvenlik", "Bilgi Güvenliği", "Siber Güvenlik Yönetimi ve Stratejisi", "Adli Bilişim"]
     }
   },
-  "navigation": {
+  "profile": {
     "skipLink": "Ana içeriğe geç",
-    "homeLabel": "Mustafa Kalkanlı ana sayfa",
-    "label": "Ana menü",
-    "items": [
-      { "href": "#hizmetler", "label": "Çalışma alanları" },
-      { "href": "#yaklasim", "label": "Yaklaşım" },
-      { "href": "#adli-bilisim", "label": "Adli Bilişim" },
-      { "href": "#iletisim", "label": "İletişim" }
-    ]
-  },
-  "hero": {
-    "eyebrow": "Siber Güvenlik Yönetimi ve Stratejisi",
-    "title": "Siber riski, yönetilebilir kararlara dönüştürün.",
-    "summary": "Yönetişim, dayanıklılık ve kanıt ihtiyaçlarını aynı karar çerçevesinde buluşturan ölçülü bir danışmanlık yaklaşımı.",
-    "primaryCta": {
-      "href": "mailto:mk@mustafakalkanli.com",
-      "label": "Danışmanlık için iletişime geçin"
-    },
-    "secondaryCta": {
-      "href": "#hizmetler",
-      "label": "Uzmanlık alanlarını inceleyin"
-    },
-    "decisionTrace": {
-      "label": "Karar izi",
-      "items": [
-        { "number": "01", "label": "Varlık" },
-        { "number": "02", "label": "Maruziyet" },
-        { "number": "03", "label": "Kanıt" },
-        { "number": "04", "label": "Karar" }
-      ]
-    }
-  },
-  "valueStrip": {
-    "label": "Karar odağı",
-    "items": [
-      {
-        "title": "Risk görünürlüğü",
-        "description": "Kritik belirsizlikleri ortak bir çerçevede görünür kılmak."
-      },
-      {
-        "title": "Önceliklendirilmiş yol haritası",
-        "description": "Kararları etki, bağlam ve uygulanabilirlikle sıralamak."
-      },
-      {
-        "title": "Kurumsal dayanıklılık",
-        "description": "Hazırlığı iş sürekliliğiyle ilişkilendirmek."
-      }
-    ]
-  },
-  "services": {
-    "sectionLabel": "Ana çalışma alanları",
-    "title": "Karar verebilir bir güvenlik programı için dört çalışma alanı.",
-    "intro": "Teknik bulguları yönetim sorularıyla ilişkilendiren, kapsamı kuruma göre şekillenen çalışma başlıkları.",
-    "items": [
-      {
-        "number": "01",
-        "title": "Siber Güvenlik Yönetimi ve Stratejisi",
-        "description": "Siber riskin iş hedefleri, sorumluluklar ve karar süreçleriyle birlikte ele alınması."
-      },
-      {
-        "number": "02",
-        "title": "Yönetişim, Risk ve Yönetim Raporlaması",
-        "description": "Yönetim için anlaşılır risk görünürlüğü, izleme ritmi ve karar bilgisi oluşturulması."
-      },
-      {
-        "number": "03",
-        "title": "Siber Dayanıklılık ve Olay Hazırlığı",
-        "description": "Olay anındaki kararları, iletişimi ve toparlanma hazırlığını birlikte düşünmek."
-      },
-      {
-        "number": "04",
-        "title": "Güvenlik Programı Değerlendirmesi",
-        "description": "Mevcut uygulamaları bağlam, risk ve öncelik açısından değerlendirmek."
-      }
-    ]
-  },
-  "scenarios": {
-    "sectionLabel": "Karar senaryoları",
-    "title": "Güvenlik kararlarının netlik gerektirdiği anlar.",
-    "intro": "Aşağıdaki sorular, teknik ayrıntıyı yönetim açısından anlamlı bir karar çerçevesine taşımaya yardımcı olur.",
-    "items": [
-      {
-        "title": "Neyi koruyoruz?",
-        "description": "Kritik varlıkları, bağımlılıkları ve iş etkisini tanımlamak."
-      },
-      {
-        "title": "Önce neyi ele almalıyız?",
-        "description": "Maruziyetleri ve kaynakları karara uygun biçimde önceliklendirmek."
-      },
-      {
-        "title": "Hazırlığımızı nasıl izleriz?",
-        "description": "İlerlemeyi, sahipliği ve risk kabulünü görünür tutmak."
-      }
-    ]
-  },
-  "approach": {
-    "sectionLabel": "Çalışma yaklaşımı",
-    "title": "Güvenlik, teknoloji listesinden önce bir karar disiplinidir.",
-    "intro": "Çalışma, kurumsal bağlamı anlamaktan uygulanabilir takip ritmine kadar ilerleyen bir çerçevede ele alınır.",
-    "steps": [
-      "Bağlamı kur",
-      "Riski görünür kıl",
-      "Önceliklendir",
-      "Yol haritası oluştur",
-      "Takip et"
-    ]
-  },
-  "forensics": {
-    "sectionLabel": "İkincil uzmanlık",
-    "title": "Adli Bilişim",
-    "summary": "Yetkilendirilmiş ve kapsamı tanımlanmış olaylarda dijital izlerin korunması, zaman çizelgesinin oluşturulması ve bulguların karar verilebilir rapora dönüştürülmesi.",
-    "principles": [
-      "Açık yetkilendirme ve tanımlı kapsam",
-      "Delil bütünlüğüne odaklanma",
-      "Uygun olduğunda salt-okunur edinim, hash kontrolü ve işlem kaydı",
-      "Delil teslim zincirini görünür tutma"
-    ]
-  },
-  "principles": {
-    "sectionLabel": "Çalışma ilkeleri",
-    "title": "Karar kalitesini koruyan ilkeler.",
-    "items": [
-      {
-        "title": "Bağlama özgü",
-        "description": "Her kurumun risklerini kendi iş modeli, varlıkları ve sorumlulukları içinde ele almak."
-      },
-      {
-        "title": "Kanıta dayalı",
-        "description": "Varsayım yerine doğrulanabilir bulgular ve açık belirsizliklerle ilerlemek."
-      },
-      {
-        "title": "Ölçülebilir",
-        "description": "Öncelikleri, sahipliği ve ilerlemeyi izlenebilir hale getirmek."
-      },
-      {
-        "title": "Gizliliğe duyarlı",
-        "description": "Bilgiyi tanımlı kapsam ve erişim sınırları içinde ele almak."
-      }
-    ]
+    "name": "Mustafa Kalkanlı",
+    "areas": ["Siber Güvenlik", "Bilgi Güvenliği", "Siber Güvenlik Yönetimi ve Stratejisi", "Adli Bilişim"]
   },
   "contact": {
-    "sectionLabel": "İletişim",
-    "title": "Danışmanlık görüşmesi için iletişime geçin.",
-    "summary": "İhtiyacınızı ve bağlamınızı kısa bir notla paylaşabilirsiniz.",
     "email": "mk@mustafakalkanli.com",
-    "emailLabel": "mk@mustafakalkanli.com adresine e-posta gönderin",
-    "githubUrl": "https://github.com/mkalkanli",
-    "githubLabel": "GitHub çalışmalarını görüntüleyin",
-    "githubText": "GitHub çalışmaları"
-  },
-  "footer": {
-    "copyright": "© 2026 Mustafa Kalkanlı",
-    "focus": "Siber Güvenlik Yönetimi ve Stratejisi",
-    "language": "Türkçe",
-    "privacy": "Gizliliğe duyarlı yaklaşım"
+    "emailLabel": "E-posta gönder"
   }
 }

@@ -73,7 +73,7 @@ void test('default project commands use the canonical static dictionary site', a
   );
 });
 
-void test('Turkish dictionary builds a non-indexable advisory entrypoint', async () => {
+void test('Turkish dictionary builds a temporary one-screen personal entrypoint', async () => {
   const [dictionary, index, css, cname, robots] = await Promise.all([
     read('content/tr.json'),
     read('index.html'),
@@ -87,24 +87,19 @@ void test('Turkish dictionary builds a non-indexable advisory entrypoint', async
   assert.match(index, /<html lang="tr"/);
   assert.match(index, /https:\/\/mustafakalkanli\.com\//);
   assert.equal(content.meta.locale, 'tr');
-  assert.equal(content.forensics.title, 'Adli Bilişim');
+  assert.equal(content.profile.name, 'Mustafa Kalkanlı');
+  assert.deepEqual(content.profile.areas, [
+    'Siber Güvenlik',
+    'Bilgi Güvenliği',
+    'Siber Güvenlik Yönetimi ve Stratejisi',
+    'Adli Bilişim',
+  ]);
   assert.equal(content.contact.email, 'mk@mustafakalkanli.com');
-  assert.match(index, /Siber Güvenlik Yönetimi ve Stratejisi/);
-  assert.match(index, /Adli Bilişim/);
   assert.doesNotMatch(index, /Digital Forensics|data-i18n|language-button/);
   assert.match(index, /<script src="script\.js" defer><\/script>/);
-  assert.equal(content.navigation.items[0].href, '#hizmetler');
-  assert.equal(content.navigation.items[1].href, '#yaklasim');
-  assert.equal(content.navigation.items[2].href, '#adli-bilisim');
-  assert.equal(content.navigation.items[3].href, '#iletisim');
-  assert.match(
-    index,
-    /<section\s+id="hizmetler"\s+class="section-shell services-section"/,
-  );
-  assert.match(
-    index,
-    /<section\s+id="senaryolar"\s+class="section-shell scenarios-section"/,
-  );
+  assert.match(index, /<h1 id="hero-title">Mustafa Kalkanlı<\/h1>/);
+  assert.match(index, /Siber Güvenlik[\s\S]*Bilgi Güvenliği[\s\S]*Siber Güvenlik Yönetimi ve Stratejisi[\s\S]*Adli Bilişim/);
+  assert.doesNotMatch(index, /<nav|id="yaklasim"|id="uzmanlik"|id="ilkeler"|id="iletisim"|decision-trace|value-strip|service-grid|scenario-grid|engagement-steps/);
   assert.match(index, /href="mailto:mk@mustafakalkanli\.com"/);
   assert.match(css, /@media \(max-width: 560px\)/);
   assert.equal(cname.trim(), 'mustafakalkanli.com');
@@ -114,7 +109,7 @@ void test('Turkish dictionary builds a non-indexable advisory entrypoint', async
   assert.doesNotMatch(robots, /Sitemap:/);
 });
 
-void test('Executive Evidence system preserves the decision trace and accessible responsive behavior', async () => {
+void test('temporary profile keeps the restrained responsive visual system', async () => {
   const [dictionary, index, css, script] = await Promise.all([
     read('content/tr.json'),
     read('index.html'),
@@ -125,25 +120,15 @@ void test('Executive Evidence system preserves the decision trace and accessible
   const content = JSON.parse(dictionary);
 
   assert.match(css, /--paper:\s*#f1eee7/i);
-  assert.match(css, /--midnight:\s*#0b1e32/i);
+  assert.match(css, /--ink:\s*#101820/i);
   assert.match(css, /--cobalt:\s*#2764ff/i);
-  assert.match(
-    css,
-    /grid-template-columns:\s*minmax\(0,\s*7fr\)\s+minmax\(0,\s*5fr\)/i,
-  );
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /@media \(max-width: 560px\)/);
   assert.doesNotMatch(css, /letter-spacing:\s*-/);
-  assert.match(index, /class="decision-trace"/);
+  assert.match(css, /\.profile-card/);
   assert.match(index, /href="#main-content"/);
   assert.match(index, /<script src="script\.js" defer><\/script>/);
-  assert.deepEqual(
-    content.hero.decisionTrace.items.map(
-      (item: { label: string }) => item.label,
-    ),
-    ['Varlık', 'Maruziyet', 'Kanıt', 'Karar'],
-  );
-  assert.match(index, /Varlık[\s\S]*Maruziyet[\s\S]*Kanıt[\s\S]*Karar/);
+  assert.equal(content.profile.areas.length, 4);
   assert.match(script, /is-scrolled/);
   assert.match(script, /is-visible/);
   assert.match(script, /prefers-reduced-motion/);
