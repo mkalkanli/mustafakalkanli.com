@@ -2,16 +2,12 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
+import { escapeHtml } from '../scripts/build-site.mjs';
+
 const read = (path: string) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-void test('page exposes bilingual navigation and core expertise', async () => {
-  const page = await read('app/page.tsx');
-  assert.match(page, /'use client'/);
-  assert.match(page, /siteCopy/);
-  assert.match(page, /setLocale/);
-  assert.match(page, /id="expertise"/);
-  assert.match(page, /id="approach"/);
-  assert.match(page, /aria-label/);
+void test('content values are escaped before template interpolation', () => {
+  assert.equal(escapeHtml('<img src="x" onerror="alert(1)"> & \'metin\''), '&lt;img src=&quot;x&quot; onerror=&quot;alert(1)&quot;&gt; &amp; &#39;metin&#39;');
 });
 
 void test('layout contains canonical metadata and verified Person data', async () => {
@@ -31,22 +27,27 @@ void test('crawler files block all indexing while the site is being prepared', a
   assert.doesNotMatch(robots, /Sitemap:/);
 });
 
-void test('static entrypoint is deployable but explicitly non-indexable', async () => {
-  const [index, css, script, cname, robots] = await Promise.all([
+void test('Turkish dictionary builds a non-indexable advisory entrypoint', async () => {
+  const [dictionary, index, css, cname, robots] = await Promise.all([
+    read('content/tr.json'),
     read('index.html'),
     read('styles.css'),
-    read('script.js'),
     read('CNAME'),
     read('robots.txt'),
   ]);
 
+  const content = JSON.parse(dictionary);
+
   assert.match(index, /<html lang="tr"/);
   assert.match(index, /https:\/\/mustafakalkanli\.com\//);
-  assert.match(index, /data-lang-target="en"/);
-  assert.match(index, /Siber G[uü]venlik Y[oö]netimi ve Stratejisi/);
-  assert.match(index, /Digital Forensics/);
+  assert.equal(content.meta.locale, 'tr');
+  assert.equal(content.forensics.title, 'Adli Bilişim');
+  assert.equal(content.contact.email, 'mk@mustafakalkanli.com');
+  assert.match(index, /Siber Güvenlik Yönetimi ve Stratejisi/);
+  assert.match(index, /Adli Bilişim/);
+  assert.doesNotMatch(index, /Digital Forensics|data-i18n|language-button/);
+  assert.match(index, /href="mailto:mk@mustafakalkanli\.com"/);
   assert.match(css, /@media \(max-width: 720px\)/);
-  assert.match(script, /localStorage/);
   assert.equal(cname.trim(), 'mustafakalkanli.com');
   assert.match(index, /name="robots" content="noindex, nofollow, noarchive"/);
   assert.match(robots, /Allow: \/$/m);
