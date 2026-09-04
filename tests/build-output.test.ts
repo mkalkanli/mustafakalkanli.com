@@ -12,5 +12,5 @@ void test('static build publishes only public site assets', async () => {
   await rm(new URL('../dist/', import.meta.url), { recursive: true, force: true });
   await execFile(process.execPath, ['scripts/build-site.mjs', '--production'], { cwd: root });
   const files = await readdir(new URL('../dist/', import.meta.url));
-  assert.deepEqual(files.sort(), ['cybersecurity-shield-v3.png', 'favicon.svg', 'index.html', 'robots.txt', 'script.js', 'styles.css']);
+  assert.deepEqual(files.sort(), ['cybersecurity-shield-v4.png', 'favicon.svg', 'index.html', 'robots.txt', 'script.js', 'styles.css']);
 });
