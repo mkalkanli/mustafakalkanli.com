@@ -14,109 +14,249 @@
     <meta property="og:description" content="{{meta.description}}" />
     <meta name="theme-color" content="{{meta.themeColor}}" />
     <link rel="stylesheet" href="styles.css" />
-    <script type="application/ld+json">{{meta.schemaJson}}</script>
+    <script src="script.js" defer></script>
+    <script type="application/ld+json">
+      {{meta.schemaJson}}
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">{{navigation.skipLink}}</a>
     <header class="site-header" aria-label="{{navigation.label}}">
-      <a class="wordmark" href="#top" aria-label="{{navigation.homeLabel}}">{{meta.siteName}}</a>
-      <nav class="main-nav" aria-label="{{navigation.label}}">
-        <a href="{{navigation.items.0.href}}">{{navigation.items.0.label}}</a>
-        <a href="{{navigation.items.1.href}}">{{navigation.items.1.label}}</a>
-        <a href="{{navigation.items.2.href}}">{{navigation.items.2.label}}</a>
-        <a href="{{navigation.items.3.href}}">{{navigation.items.3.label}}</a>
-      </nav>
+      <div class="header-inner">
+        <a class="wordmark" href="#top" aria-label="{{navigation.homeLabel}}"
+          >{{meta.siteName}}</a
+        >
+        <nav class="main-nav" aria-label="{{navigation.label}}">
+          <a href="{{navigation.items.0.href}}">{{navigation.items.0.label}}</a>
+          <a href="{{navigation.items.1.href}}">{{navigation.items.1.label}}</a>
+          <a href="{{navigation.items.2.href}}">{{navigation.items.2.label}}</a>
+          <a href="{{navigation.items.3.href}}">{{navigation.items.3.label}}</a>
+        </nav>
+      </div>
     </header>
 
     <main id="main-content">
       <section id="top" class="hero" aria-labelledby="hero-title">
-        <div class="hero-content">
+        <div class="hero-content" data-reveal>
           <p class="eyebrow">{{hero.eyebrow}}</p>
           <h1 id="hero-title">{{hero.title}}</h1>
           <p class="hero-summary">{{hero.summary}}</p>
           <div class="hero-actions">
-            <a class="primary-link" href="{{hero.primaryCta.href}}">{{hero.primaryCta.label}}</a>
-            <a class="text-link" href="{{hero.secondaryCta.href}}">{{hero.secondaryCta.label}}</a>
+            <a class="primary-link" href="{{hero.primaryCta.href}}"
+              >{{hero.primaryCta.label}}</a
+            >
+            <a class="text-link" href="{{hero.secondaryCta.href}}"
+              >{{hero.secondaryCta.label}}</a
+            >
           </div>
         </div>
-        <div class="decision-trace" aria-label="{{valueStrip.label}}">
-          <span>{{valueStrip.items.0.title}}</span><span>{{valueStrip.items.1.title}}</span><span>{{valueStrip.items.2.title}}</span>
+        <aside
+          class="decision-trace"
+          aria-labelledby="decision-trace-title"
+          data-reveal
+        >
+          <p class="decision-trace__label" id="decision-trace-title">
+            {{hero.decisionTrace.label}}
+          </p>
+          <ol>
+            <li>
+              <span>{{hero.decisionTrace.items.0.number}}</span
+              ><strong>{{hero.decisionTrace.items.0.label}}</strong>
+            </li>
+            <li>
+              <span>{{hero.decisionTrace.items.1.number}}</span
+              ><strong>{{hero.decisionTrace.items.1.label}}</strong>
+            </li>
+            <li>
+              <span>{{hero.decisionTrace.items.2.number}}</span
+              ><strong>{{hero.decisionTrace.items.2.label}}</strong>
+            </li>
+            <li>
+              <span>{{hero.decisionTrace.items.3.number}}</span
+              ><strong>{{hero.decisionTrace.items.3.label}}</strong>
+            </li>
+          </ol>
+        </aside>
+      </section>
+
+      <section
+        class="value-strip section-shell"
+        aria-label="{{valueStrip.label}}"
+        data-reveal
+      >
+        <article>
+          <h2>{{valueStrip.items.0.title}}</h2>
+          <p>{{valueStrip.items.0.description}}</p>
+        </article>
+        <article>
+          <h2>{{valueStrip.items.1.title}}</h2>
+          <p>{{valueStrip.items.1.description}}</p>
+        </article>
+        <article>
+          <h2>{{valueStrip.items.2.title}}</h2>
+          <p>{{valueStrip.items.2.description}}</p>
+        </article>
+      </section>
+
+      <section
+        id="hizmetler"
+        class="section-shell services-section"
+        aria-labelledby="services-title"
+      >
+        <div class="section-heading" data-reveal>
+          <p class="section-index">{{services.sectionLabel}}</p>
+          <h2 id="services-title">{{services.title}}</h2>
+          <p class="section-intro">{{services.intro}}</p>
         </div>
-      </section>
-
-      <section class="value-strip" aria-label="{{valueStrip.label}}">
-        <article><h2>{{valueStrip.items.0.title}}</h2><p>{{valueStrip.items.0.description}}</p></article>
-        <article><h2>{{valueStrip.items.1.title}}</h2><p>{{valueStrip.items.1.description}}</p></article>
-        <article><h2>{{valueStrip.items.2.title}}</h2><p>{{valueStrip.items.2.description}}</p></article>
-      </section>
-
-      <section id="hizmetler" class="section-shell services-section" aria-labelledby="services-title">
-        <p class="section-index">{{services.sectionLabel}}</p>
-        <h2 id="services-title">{{services.title}}</h2>
-        <p class="section-intro">{{services.intro}}</p>
         <div class="service-grid">
-          <article><span>{{services.items.0.number}}</span><h3>{{services.items.0.title}}</h3><p>{{services.items.0.description}}</p></article>
-          <article><span>{{services.items.1.number}}</span><h3>{{services.items.1.title}}</h3><p>{{services.items.1.description}}</p></article>
-          <article><span>{{services.items.2.number}}</span><h3>{{services.items.2.title}}</h3><p>{{services.items.2.description}}</p></article>
-          <article><span>{{services.items.3.number}}</span><h3>{{services.items.3.title}}</h3><p>{{services.items.3.description}}</p></article>
+          <article data-reveal>
+            <span>{{services.items.0.number}}</span>
+            <h3>{{services.items.0.title}}</h3>
+            <p>{{services.items.0.description}}</p>
+          </article>
+          <article data-reveal>
+            <span>{{services.items.1.number}}</span>
+            <h3>{{services.items.1.title}}</h3>
+            <p>{{services.items.1.description}}</p>
+          </article>
+          <article data-reveal>
+            <span>{{services.items.2.number}}</span>
+            <h3>{{services.items.2.title}}</h3>
+            <p>{{services.items.2.description}}</p>
+          </article>
+          <article data-reveal>
+            <span>{{services.items.3.number}}</span>
+            <h3>{{services.items.3.title}}</h3>
+            <p>{{services.items.3.description}}</p>
+          </article>
         </div>
       </section>
 
-      <section id="senaryolar" class="section-shell scenarios-section" aria-labelledby="scenarios-title">
-        <p class="section-index">{{scenarios.sectionLabel}}</p>
-        <h2 id="scenarios-title">{{scenarios.title}}</h2>
-        <p class="section-intro">{{scenarios.intro}}</p>
+      <section
+        id="senaryolar"
+        class="section-shell scenarios-section"
+        aria-labelledby="scenarios-title"
+      >
+        <div class="section-heading" data-reveal>
+          <p class="section-index">{{scenarios.sectionLabel}}</p>
+          <h2 id="scenarios-title">{{scenarios.title}}</h2>
+          <p class="section-intro">{{scenarios.intro}}</p>
+        </div>
         <div class="scenario-grid">
-          <article><h3>{{scenarios.items.0.title}}</h3><p>{{scenarios.items.0.description}}</p></article>
-          <article><h3>{{scenarios.items.1.title}}</h3><p>{{scenarios.items.1.description}}</p></article>
-          <article><h3>{{scenarios.items.2.title}}</h3><p>{{scenarios.items.2.description}}</p></article>
+          <article data-reveal>
+            <h3>{{scenarios.items.0.title}}</h3>
+            <p>{{scenarios.items.0.description}}</p>
+          </article>
+          <article data-reveal>
+            <h3>{{scenarios.items.1.title}}</h3>
+            <p>{{scenarios.items.1.description}}</p>
+          </article>
+          <article data-reveal>
+            <h3>{{scenarios.items.2.title}}</h3>
+            <p>{{scenarios.items.2.description}}</p>
+          </article>
         </div>
       </section>
 
-      <section id="yaklasim" class="approach-section" aria-labelledby="approach-title">
+      <section
+        id="yaklasim"
+        class="approach-section"
+        aria-labelledby="approach-title"
+      >
         <div class="section-shell">
-          <p class="section-index">{{approach.sectionLabel}}</p>
-          <h2 id="approach-title">{{approach.title}}</h2>
-          <p class="section-intro">{{approach.intro}}</p>
-          <ol class="engagement-steps">
-            <li>{{approach.steps.0}}</li><li>{{approach.steps.1}}</li><li>{{approach.steps.2}}</li><li>{{approach.steps.3}}</li><li>{{approach.steps.4}}</li>
+          <div class="section-heading" data-reveal>
+            <p class="section-index">{{approach.sectionLabel}}</p>
+            <h2 id="approach-title">{{approach.title}}</h2>
+            <p class="section-intro">{{approach.intro}}</p>
+          </div>
+          <ol class="engagement-steps" data-reveal>
+            <li><span>{{approach.steps.0}}</span></li>
+            <li><span>{{approach.steps.1}}</span></li>
+            <li><span>{{approach.steps.2}}</span></li>
+            <li><span>{{approach.steps.3}}</span></li>
+            <li><span>{{approach.steps.4}}</span></li>
           </ol>
         </div>
       </section>
 
-      <section id="adli-bilisim" class="section-shell forensics-panel" aria-labelledby="forensics-title">
-        <p class="section-index">{{forensics.sectionLabel}}</p>
-        <h2 id="forensics-title">{{forensics.title}}</h2>
-        <p>{{forensics.summary}}</p>
-        <ul>
-          <li>{{forensics.principles.0}}</li><li>{{forensics.principles.1}}</li><li>{{forensics.principles.2}}</li><li>{{forensics.principles.3}}</li>
+      <section
+        id="adli-bilisim"
+        class="section-shell forensics-panel"
+        aria-labelledby="forensics-title"
+      >
+        <div class="forensics-heading" data-reveal>
+          <p class="section-index">{{forensics.sectionLabel}}</p>
+          <h2 id="forensics-title">{{forensics.title}}</h2>
+          <p>{{forensics.summary}}</p>
+        </div>
+        <ul data-reveal>
+          <li>{{forensics.principles.0}}</li>
+          <li>{{forensics.principles.1}}</li>
+          <li>{{forensics.principles.2}}</li>
+          <li>{{forensics.principles.3}}</li>
         </ul>
       </section>
 
-      <section class="section-shell principles-section" aria-labelledby="principles-title">
-        <p class="section-index">{{principles.sectionLabel}}</p>
-        <h2 id="principles-title">{{principles.title}}</h2>
+      <section
+        class="section-shell principles-section"
+        aria-labelledby="principles-title"
+      >
+        <div class="section-heading" data-reveal>
+          <p class="section-index">{{principles.sectionLabel}}</p>
+          <h2 id="principles-title">{{principles.title}}</h2>
+        </div>
         <div class="principles-grid">
-          <article><h3>{{principles.items.0.title}}</h3><p>{{principles.items.0.description}}</p></article>
-          <article><h3>{{principles.items.1.title}}</h3><p>{{principles.items.1.description}}</p></article>
-          <article><h3>{{principles.items.2.title}}</h3><p>{{principles.items.2.description}}</p></article>
-          <article><h3>{{principles.items.3.title}}</h3><p>{{principles.items.3.description}}</p></article>
+          <article data-reveal>
+            <h3>{{principles.items.0.title}}</h3>
+            <p>{{principles.items.0.description}}</p>
+          </article>
+          <article data-reveal>
+            <h3>{{principles.items.1.title}}</h3>
+            <p>{{principles.items.1.description}}</p>
+          </article>
+          <article data-reveal>
+            <h3>{{principles.items.2.title}}</h3>
+            <p>{{principles.items.2.description}}</p>
+          </article>
+          <article data-reveal>
+            <h3>{{principles.items.3.title}}</h3>
+            <p>{{principles.items.3.description}}</p>
+          </article>
         </div>
       </section>
 
-      <section id="iletisim" class="section-shell contact-section" aria-labelledby="contact-title">
-        <p class="section-index">{{contact.sectionLabel}}</p>
-        <h2 id="contact-title">{{contact.title}}</h2>
-        <p>{{contact.summary}}</p>
-        <div class="contact-actions">
-          <a class="primary-link" href="mailto:{{contact.email}}" aria-label="{{contact.emailLabel}}">{{contact.email}}</a>
-          <a class="text-link" href="{{contact.githubUrl}}" target="_blank" rel="noopener noreferrer" aria-label="{{contact.githubLabel}}">{{contact.githubText}}</a>
+      <section
+        id="iletisim"
+        class="contact-section"
+        aria-labelledby="contact-title"
+      >
+        <div class="section-shell contact-inner" data-reveal>
+          <p class="section-index">{{contact.sectionLabel}}</p>
+          <h2 id="contact-title">{{contact.title}}</h2>
+          <p>{{contact.summary}}</p>
+          <div class="contact-actions">
+            <a
+              class="primary-link"
+              href="mailto:{{contact.email}}"
+              aria-label="{{contact.emailLabel}}"
+              >{{contact.email}}</a
+            >
+            <a
+              class="text-link"
+              href="{{contact.githubUrl}}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="{{contact.githubLabel}}"
+              >{{contact.githubText}}</a
+            >
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer section-shell">
-      <span>{{footer.copyright}}</span><span>{{footer.focus}}</span><span>{{footer.language}}</span><span>{{footer.privacy}}</span>
+      <span>{{footer.copyright}}</span><span>{{footer.focus}}</span
+      ><span>{{footer.language}}</span><span>{{footer.privacy}}</span>
     </footer>
   </body>
 </html>

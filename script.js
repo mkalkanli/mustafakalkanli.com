@@ -1,53 +1,63 @@
-const translations = document.querySelectorAll('[data-i18n-tr]');
-const languageButton = document.querySelector('[data-lang-target]');
-const year = document.querySelector('#year');
+const root = document.documentElement;
+const header = document.querySelector('.site-header');
+const revealItems = [...document.querySelectorAll('[data-reveal]')];
+const sectionLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')];
+const sections = [...document.querySelectorAll('main section[id]')];
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const meta = {
-  tr: {
-    lang: 'tr',
-    title: 'Mustafa Kalkanlı | Siber Güvenlik Stratejisi',
-    description:
-      'Mustafa Kalkanlı’nın siber güvenlik yönetimi, strateji, kurumsal dayanıklılık ve dijital adli analiz yaklaşımı.',
-    next: 'en',
-    label: 'EN',
-    aria: 'Switch language to English',
-  },
-  en: {
-    lang: 'en',
-    title: 'Mustafa Kalkanli | Cybersecurity Strategy',
-    description:
-      'Explore Mustafa Kalkanli’s perspective on cybersecurity management, strategy, organizational resilience, and digital forensics.',
-    next: 'tr',
-    label: 'TR',
-    aria: 'Dili Türkçeye çevir',
-  },
+const updateHeader = () => {
+  header?.classList.toggle('is-scrolled', window.scrollY > 16);
 };
 
-function setLocale(locale) {
-  const selected = meta[locale] ? locale : 'tr';
-  const current = meta[selected];
+const revealAll = () => {
+  root.classList.remove('motion-ready');
+  revealItems.forEach((item) => item.classList.add('is-visible'));
+};
 
-  document.documentElement.lang = current.lang;
-  document.title = current.title;
-  document.querySelector('meta[name="description"]')?.setAttribute('content', current.description);
-
-  translations.forEach((element) => {
-    element.textContent = element.dataset[`i18n${selected[0].toUpperCase()}${selected.slice(1)}`] ?? element.textContent;
-  });
-
-  if (languageButton) {
-    languageButton.textContent = current.label;
-    languageButton.dataset.langTarget = current.next;
-    languageButton.setAttribute('aria-label', current.aria);
+const observeReveals = () => {
+  if (motionPreference.matches || !('IntersectionObserver' in window)) {
+    revealAll();
+    return;
   }
 
-  localStorage.setItem('mk_locale', selected);
-}
+  root.classList.add('motion-ready');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: '0px 0px -8%', threshold: 0.08 },
+  );
 
-languageButton?.addEventListener('click', () => setLocale(languageButton.dataset.langTarget ?? 'en'));
+  revealItems.forEach((item) => observer.observe(item));
+};
 
-if (year) {
-  year.textContent = String(new Date().getFullYear());
-}
+const observeSections = () => {
+  if (!('IntersectionObserver' in window)) return;
 
-setLocale(localStorage.getItem('mk_locale') ?? 'tr');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const current = entries.find((entry) => entry.isIntersecting);
+      if (!current) return;
+
+      sectionLinks.forEach((link) => {
+        const isCurrent = link.getAttribute('href') === `#${current.target.id}`;
+        link.classList.toggle('is-current', isCurrent);
+        if (isCurrent) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    },
+    { rootMargin: '-30% 0px -60%', threshold: 0 },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+};
+
+updateHeader();
+window.addEventListener('scroll', updateHeader, { passive: true });
+motionPreference.addEventListener?.('change', revealAll);
+observeReveals();
+observeSections();

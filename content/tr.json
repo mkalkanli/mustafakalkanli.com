@@ -38,15 +38,39 @@
     "eyebrow": "Siber Güvenlik Yönetimi ve Stratejisi",
     "title": "Siber riski, yönetilebilir kararlara dönüştürün.",
     "summary": "Yönetişim, dayanıklılık ve kanıt ihtiyaçlarını aynı karar çerçevesinde buluşturan ölçülü bir danışmanlık yaklaşımı.",
-    "primaryCta": { "href": "mailto:mk@mustafakalkanli.com", "label": "Danışmanlık için iletişime geçin" },
-    "secondaryCta": { "href": "#hizmetler", "label": "Uzmanlık alanlarını inceleyin" }
+    "primaryCta": {
+      "href": "mailto:mk@mustafakalkanli.com",
+      "label": "Danışmanlık için iletişime geçin"
+    },
+    "secondaryCta": {
+      "href": "#hizmetler",
+      "label": "Uzmanlık alanlarını inceleyin"
+    },
+    "decisionTrace": {
+      "label": "Karar izi",
+      "items": [
+        { "number": "01", "label": "Varlık" },
+        { "number": "02", "label": "Maruziyet" },
+        { "number": "03", "label": "Kanıt" },
+        { "number": "04", "label": "Karar" }
+      ]
+    }
   },
   "valueStrip": {
     "label": "Karar odağı",
     "items": [
-      { "title": "Risk görünürlüğü", "description": "Kritik belirsizlikleri ortak bir çerçevede görünür kılmak." },
-      { "title": "Önceliklendirilmiş yol haritası", "description": "Kararları etki, bağlam ve uygulanabilirlikle sıralamak." },
-      { "title": "Kurumsal dayanıklılık", "description": "Hazırlığı iş sürekliliğiyle ilişkilendirmek." }
+      {
+        "title": "Risk görünürlüğü",
+        "description": "Kritik belirsizlikleri ortak bir çerçevede görünür kılmak."
+      },
+      {
+        "title": "Önceliklendirilmiş yol haritası",
+        "description": "Kararları etki, bağlam ve uygulanabilirlikle sıralamak."
+      },
+      {
+        "title": "Kurumsal dayanıklılık",
+        "description": "Hazırlığı iş sürekliliğiyle ilişkilendirmek."
+      }
     ]
   },
   "services": {
@@ -122,10 +146,22 @@
     "sectionLabel": "Çalışma ilkeleri",
     "title": "Karar kalitesini koruyan ilkeler.",
     "items": [
-      { "title": "Bağlama özgü", "description": "Her kurumun risklerini kendi iş modeli, varlıkları ve sorumlulukları içinde ele almak." },
-      { "title": "Kanıta dayalı", "description": "Varsayım yerine doğrulanabilir bulgular ve açık belirsizliklerle ilerlemek." },
-      { "title": "Ölçülebilir", "description": "Öncelikleri, sahipliği ve ilerlemeyi izlenebilir hale getirmek." },
-      { "title": "Gizliliğe duyarlı", "description": "Bilgiyi tanımlı kapsam ve erişim sınırları içinde ele almak." }
+      {
+        "title": "Bağlama özgü",
+        "description": "Her kurumun risklerini kendi iş modeli, varlıkları ve sorumlulukları içinde ele almak."
+      },
+      {
+        "title": "Kanıta dayalı",
+        "description": "Varsayım yerine doğrulanabilir bulgular ve açık belirsizliklerle ilerlemek."
+      },
+      {
+        "title": "Ölçülebilir",
+        "description": "Öncelikleri, sahipliği ve ilerlemeyi izlenebilir hale getirmek."
+      },
+      {
+        "title": "Gizliliğe duyarlı",
+        "description": "Bilgiyi tanımlı kapsam ve erişim sınırları içinde ele almak."
+      }
     ]
   },
   "contact": {
