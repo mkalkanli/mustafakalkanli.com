@@ -28,9 +28,9 @@
     "homeLabel": "Mustafa Kalkanlı ana sayfa",
     "label": "Ana menü",
     "items": [
-      { "href": "#uzmanlik", "label": "Uzmanlık" },
       { "href": "#hizmetler", "label": "Çalışma alanları" },
       { "href": "#yaklasim", "label": "Yaklaşım" },
+      { "href": "#adli-bilisim", "label": "Adli Bilişim" },
       { "href": "#iletisim", "label": "İletişim" }
     ]
   },
@@ -39,7 +39,7 @@
     "title": "Siber riski, yönetilebilir kararlara dönüştürün.",
     "summary": "Yönetişim, dayanıklılık ve kanıt ihtiyaçlarını aynı karar çerçevesinde buluşturan ölçülü bir danışmanlık yaklaşımı.",
     "primaryCta": { "href": "mailto:mk@mustafakalkanli.com", "label": "Danışmanlık için iletişime geçin" },
-    "secondaryCta": { "href": "#uzmanlik", "label": "Uzmanlık alanlarını inceleyin" }
+    "secondaryCta": { "href": "#hizmetler", "label": "Uzmanlık alanlarını inceleyin" }
   },
   "valueStrip": {
     "label": "Karar odağı",

@@ -46,6 +46,13 @@ void test('Turkish dictionary builds a non-indexable advisory entrypoint', async
   assert.match(index, /Siber Güvenlik Yönetimi ve Stratejisi/);
   assert.match(index, /Adli Bilişim/);
   assert.doesNotMatch(index, /Digital Forensics|data-i18n|language-button/);
+  assert.doesNotMatch(index, /<script[^>]+src="script\.js"/);
+  assert.equal(content.navigation.items[0].href, '#hizmetler');
+  assert.equal(content.navigation.items[1].href, '#yaklasim');
+  assert.equal(content.navigation.items[2].href, '#adli-bilisim');
+  assert.equal(content.navigation.items[3].href, '#iletisim');
+  assert.match(index, /<section id="hizmetler" class="section-shell services-section"/);
+  assert.match(index, /<section id="senaryolar" class="section-shell scenarios-section"/);
   assert.match(index, /href="mailto:mk@mustafakalkanli\.com"/);
   assert.match(css, /@media \(max-width: 720px\)/);
   assert.equal(cname.trim(), 'mustafakalkanli.com');
