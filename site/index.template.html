@@ -13,8 +13,8 @@
     <meta property="og:title" content="{{meta.title}}" />
     <meta property="og:description" content="{{meta.description}}" />
     <meta name="theme-color" content="{{meta.themeColor}}" />
-    <link rel="stylesheet" href="styles.css?v=5" />
-    <script src="script.js?v=5" defer></script>
+    <link rel="stylesheet" href="styles.css?v=7" />
+    <script src="script.js?v=7" defer></script>
     <script type="application/ld+json">{{meta.schemaJson}}</script>
   </head>
   <body>
@@ -22,7 +22,7 @@
     <main id="main-content">
       <section id="top" class="profile-card" aria-label="{{profile.name}}" data-reveal>
         <img class="security-art" src="cybersecurity-shield-v4.png" alt="" width="1024" height="1536" />
-        <details class="expertise-menu">
+        <details class="expertise-menu" open>
           <summary>{{profile.menuLabel}}</summary>
           <ul aria-label="{{profile.menuLabel}}">
             <li>{{profile.areas.0}}</li>

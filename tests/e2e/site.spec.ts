@@ -73,8 +73,10 @@ test('renders a Turkish-only one-screen personal entrypoint with non-indexable c
   );
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(0);
   await expect(page.locator('.security-art')).toBeVisible();
-  await expect(page.getByText('Siber Güvenlik', { exact: true })).toBeHidden();
-  await page.getByText('Menü', { exact: true }).click();
+  if ((page.viewportSize()?.width ?? 0) <= 700) {
+    await expect(page.getByText('Siber Güvenlik', { exact: true })).toBeHidden();
+    await page.getByText('Menü', { exact: true }).click();
+  }
   await expect(page.getByText('Siber Güvenlik', { exact: true })).toBeVisible();
   await expect(page.getByText('Bilgi Güvenliği', { exact: true })).toBeVisible();
   await expect(page.getByText('Siber Güvenlik Yönetimi ve Stratejisi', { exact: true })).toHaveCount(0);

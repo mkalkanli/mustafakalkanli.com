@@ -7,7 +7,7 @@ a:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
 .skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 1; padding: 0.65rem 1rem; transform: translateY(-150%); background: var(--cobalt); color: #fff; font-weight: 700; }
 .skip-link:focus { transform: translateY(0); }
 .profile-card { position: relative; width: min(84rem, calc(100% - 4rem)); min-height: calc(100vh - 5rem); display: grid; grid-template-columns: 1fr minmax(18rem, 28rem) 1fr; align-items: center; margin-inline: auto; padding-block: 4rem; }
-.security-art { grid-column: 2; width: 100%; height: auto; display: block; opacity: 0.9; object-fit: contain; }
+.security-art { grid-column: 2; width: 100%; height: auto; display: block; transform: translateY(2.5rem); opacity: 0.9; object-fit: contain; }
 .expertise-menu { position: absolute; top: 1.5rem; right: 0; z-index: 1; width: min(47rem, 58vw); text-align: right; }
 .expertise-menu summary { min-height: 44px; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; color: var(--ink); font-family: var(--mono); cursor: pointer; list-style: none; }
 .expertise-menu summary::-webkit-details-marker { display: none; }
@@ -20,5 +20,5 @@ a:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
 .email-link { width: fit-content; min-height: 44px; padding: 1rem 0 0.65rem; border-bottom: 2px solid var(--cobalt); color: var(--ink); font-size: 1rem; font-weight: 750; text-decoration: none; }
 .email-link:hover { color: var(--cobalt); }
 @media (prefers-reduced-motion: no-preference) { html.motion-ready [data-reveal] { opacity: 0; transform: translateY(1rem); transition: opacity 360ms ease, transform 360ms ease; } html.motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0); } }
-@media (max-width: 700px) { .profile-card { width: min(100% - 2rem, 46rem); min-height: auto; display: flex; flex-direction: column; padding-block: 5rem 2rem; } .security-art { width: min(72vw, 20rem); margin: 0 auto 1.5rem; } .expertise-menu { top: 1rem; width: min(17rem, 82vw); } .profile-card ul { grid-template-columns: 1fr; justify-content: stretch; gap: 0.6rem; margin-top: 0.5rem; background: var(--paper); } .site-footer { width: min(100% - 2rem, 46rem); min-height: 5rem; } }
+@media (max-width: 700px) { .profile-card { width: min(100% - 2rem, 46rem); min-height: auto; display: flex; flex-direction: column; padding-block: 5rem 2rem; } .security-art { width: min(72vw, 20rem); margin: 0 auto 1.5rem; transform: none; } .expertise-menu { top: 1rem; width: min(17rem, 82vw); } .profile-card ul { grid-template-columns: 1fr; justify-content: stretch; gap: 0.6rem; margin-top: 0.5rem; background: var(--paper); } .site-footer { width: min(100% - 2rem, 46rem); min-height: 5rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; } }
