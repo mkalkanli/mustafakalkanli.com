@@ -22,24 +22,22 @@ void test('layout contains canonical metadata and verified Person data', async (
   assert.match(layout, /openGraph/);
 });
 
-void test('crawler files make the canonical homepage indexable', async () => {
-  const [robots, sitemap] = await Promise.all([
-    read('public/robots.txt'),
-    read('public/sitemap.xml'),
-  ]);
+void test('crawler files block all indexing while the site is being prepared', async () => {
+  const [layout, robots] = await Promise.all([read('app/layout.tsx'), read('public/robots.txt')]);
+  assert.match(layout, /index:\s*false/);
+  assert.match(layout, /follow:\s*false/);
   assert.match(robots, /Allow: \/$/m);
   assert.doesNotMatch(robots, /Disallow: \/$/m);
-  assert.match(sitemap, /https:\/\/mustafakalkanli\.com\//);
+  assert.doesNotMatch(robots, /Sitemap:/);
 });
 
-void test('GitHub Pages static entrypoint is deployable and indexable', async () => {
-  const [index, css, script, cname, robots, sitemap] = await Promise.all([
+void test('static entrypoint is deployable but explicitly non-indexable', async () => {
+  const [index, css, script, cname, robots] = await Promise.all([
     read('index.html'),
     read('styles.css'),
     read('script.js'),
     read('CNAME'),
     read('robots.txt'),
-    read('sitemap.xml'),
   ]);
 
   assert.match(index, /<html lang="tr"/);
@@ -50,6 +48,8 @@ void test('GitHub Pages static entrypoint is deployable and indexable', async ()
   assert.match(css, /@media \(max-width: 720px\)/);
   assert.match(script, /localStorage/);
   assert.equal(cname.trim(), 'mustafakalkanli.com');
-  assert.match(robots, /Sitemap: https:\/\/mustafakalkanli\.com\/sitemap\.xml/);
-  assert.match(sitemap, /<loc>https:\/\/mustafakalkanli\.com\/<\/loc>/);
+  assert.match(index, /name="robots" content="noindex, nofollow, noarchive"/);
+  assert.match(robots, /Allow: \/$/m);
+  assert.doesNotMatch(robots, /Disallow: \/$/m);
+  assert.doesNotMatch(robots, /Sitemap:/);
 });

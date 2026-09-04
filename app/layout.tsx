@@ -12,7 +12,12 @@ export const metadata: Metadata = {
   description: 'Mustafa Kalkanlı’nın siber güvenlik yönetimi, strateji, kurumsal dayanıklılık ve dijital adli analiz yaklaşımını keşfedin.',
   alternates: { canonical: canonicalUrl },
   openGraph: { type: 'website', url: canonicalUrl, title: 'Mustafa Kalkanlı | Siber Güvenlik Stratejisi', description: 'Siber güvenlik yönetimi, strateji, kurumsal dayanıklılık ve dijital adli analiz.', siteName: 'Mustafa Kalkanlı', locale: 'tr_TR' },
-  robots: { index: true, follow: true },
+  robots: {
+    index: false,
+    follow: false,
+    noarchive: true,
+    googleBot: { index: false, follow: false, noarchive: true },
+  },
 };
 
 const personSchema = { '@context': 'https://schema.org', '@type': 'Person', name: 'Mustafa Kalkanlı', url: canonicalUrl, sameAs: ['https://github.com/mkalkanli'], knowsAbout: ['Cybersecurity Management', 'Cybersecurity Strategy', 'Digital Forensics'] };
