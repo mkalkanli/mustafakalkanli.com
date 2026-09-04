@@ -131,7 +131,7 @@ void test('temporary profile keeps the restrained responsive visual system', asy
   assert.match(css, /\.profile-card ul\s*\{[^}]*position:\s*absolute;[^}]*top:/);
   assert.match(css, /\.profile-card ul\s*\{[^}]*right:\s*0;/);
   assert.match(css, /@media \(max-width: 700px\)[^{]*\{[\s\S]*\.profile-card ul\s*\{[^}]*position:\s*static;/);
-  assert.match(index, /class="security-art"[^>]*src="cybersecurity-core-v1\.png"/);
+  assert.match(index, /class="security-art"[^>]*src="cybersecurity-shield-v3\.png"/);
   assert.match(index, /href="#main-content"/);
   assert.match(index, /<script src="script\.js\?v=2" defer><\/script>/);
   assert.equal(content.profile.areas.length, 3);
