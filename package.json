@@ -8,6 +8,9 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:content": "node scripts/build-site.mjs --preview",
+    "build:static": "node scripts/build-site.mjs --production",
+    "dev:static": "vite --host 127.0.0.1 --port 4173",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
