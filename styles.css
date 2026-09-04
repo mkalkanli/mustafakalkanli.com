@@ -68,7 +68,7 @@ h2,
 h3 {
   font-family: var(--serif);
   font-weight: 600;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
 }
 
 main section[id] {
@@ -129,7 +129,7 @@ main section[id] {
   font-family: var(--serif);
   font-size: 1.15rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .wordmark::before {
@@ -344,7 +344,7 @@ h1 {
   font-family: var(--serif);
   font-size: clamp(1.65rem, 2.5vw, 2.25rem);
   font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .value-strip {

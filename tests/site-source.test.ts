@@ -14,24 +14,59 @@ void test('content values are escaped before template interpolation', () => {
   );
 });
 
-void test('layout contains canonical metadata and verified Person data', async () => {
-  const layout = await read('app/layout.tsx');
-  assert.match(layout, /https:\/\/mustafakalkanli\.com/);
-  assert.match(layout, /application\/ld\+json/);
-  assert.match(layout, /Mustafa Kalkanlı/);
-  assert.match(layout, /openGraph/);
+void test('generated site contains canonical metadata and verified Person data', async () => {
+  const [dictionary, index] = await Promise.all([
+    read('content/tr.json'),
+    read('index.html'),
+  ]);
+  const content = JSON.parse(dictionary);
+
+  assert.equal(content.meta.canonicalUrl, 'https://mustafakalkanli.com/');
+  assert.equal(content.meta.schema['@type'], 'Person');
+  assert.equal(content.meta.schema.name, 'Mustafa Kalkanlı');
+  assert.match(
+    index,
+    /<link rel="canonical" href="https:\/\/mustafakalkanli\.com\/"/,
+  );
+  assert.match(index, /<script type="application\/ld\+json">/);
+  assert.match(index, /<meta property="og:title"/);
 });
 
 void test('crawler files block all indexing while the site is being prepared', async () => {
-  const [layout, robots] = await Promise.all([
-    read('app/layout.tsx'),
-    read('public/robots.txt'),
+  const [dictionary, index, robots] = await Promise.all([
+    read('content/tr.json'),
+    read('index.html'),
+    read('robots.txt'),
   ]);
-  assert.match(layout, /index:\s*false/);
-  assert.match(layout, /follow:\s*false/);
+  const content = JSON.parse(dictionary);
+
+  assert.equal(content.meta.robots, 'noindex, nofollow, noarchive');
+  assert.match(index, /name="robots" content="noindex, nofollow, noarchive"/);
   assert.match(robots, /Allow: \/$/m);
   assert.doesNotMatch(robots, /Disallow: \/$/m);
   assert.doesNotMatch(robots, /Sitemap:/);
+});
+
+void test('default project commands use the canonical static dictionary site', async () => {
+  const packageJson = JSON.parse(await read('package.json'));
+
+  assert.equal(
+    packageJson.scripts.dev,
+    'npm run build:content && npm run dev:static',
+  );
+  assert.equal(packageJson.scripts.build, 'npm run build:static');
+  assert.equal(
+    packageJson.scripts['build:content'],
+    'node scripts/build-site.mjs --preview',
+  );
+  assert.equal(
+    packageJson.scripts['build:static'],
+    'node scripts/build-site.mjs --production',
+  );
+  assert.equal(
+    packageJson.scripts['dev:static'],
+    'vite --host 127.0.0.1 --port 4173',
+  );
 });
 
 void test('Turkish dictionary builds a non-indexable advisory entrypoint', async () => {
@@ -94,6 +129,7 @@ void test('Executive Evidence system preserves the decision trace and accessible
   );
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /@media \(max-width: 560px\)/);
+  assert.doesNotMatch(css, /letter-spacing:\s*-/);
   assert.match(index, /class="decision-trace"/);
   assert.match(index, /href="#main-content"/);
   assert.match(index, /<script src="script\.js" defer><\/script>/);

@@ -6,8 +6,8 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build",
+    "dev": "npm run build:content && npm run dev:static",
+    "build": "npm run build:static",
     "build:content": "node scripts/build-site.mjs --preview",
     "build:static": "node scripts/build-site.mjs --production",
     "dev:static": "vite --host 127.0.0.1 --port 4173",
