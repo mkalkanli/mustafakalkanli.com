@@ -2,15 +2,15 @@
 
 ## Amaç
 
-mustafakalkanli.com'u sade bir kişisel tanıtım sayfasından, yönetici seviyesinde güven veren iki dilli bir danışmanlık vitrini haline getirmek. Site beş saniye içinde adın, ana uzmanlık alanının ve sağlanan değerin anlaşılmasını sağlamalıdır.
+mustafakalkanli.com'u sade bir kişisel tanıtım sayfasından, yönetici seviyesinde güven veren Türkçe bir danışmanlık vitrini haline getirmek. Site beş saniye içinde adın, ana uzmanlık alanının ve sağlanan değerin anlaşılmasını sağlamalıdır.
 
 ## Kesinleşen kararlar
 
 - Sayfada yalnızca **Mustafa Kalkanlı** adı kullanılacak; adın yanında veya altında unvan bulunmayacak.
 - Ana uzmanlık **Siber Güvenlik Yönetimi ve Stratejisi** olacak.
-- **Adli Bilişim / Digital Forensics** ikincil uzmanlık olarak sunulacak.
+- **Adli Bilişim** ikincil uzmanlık olarak sunulacak.
 - Adli bilişim için yanlış veya uydurma bir Türkçe terim kullanılmayacak.
-- Türkçe varsayılan dil olacak; İngilizce içerik eksiksiz ve anlam bakımından eşdeğer olacak.
+- İlk sürüm yalnızca Türkçe olacak; İngilizce daha sonraki bir sürümde eklenecek.
 - Site, içerik son onayı verilene kadar `noindex, nofollow, noarchive` kalacak.
 - Kanıtlanmamış sertifika, müşteri, deneyim süresi, başarı oranı, vaka, bilirkişilik, 7/24 hizmet veya hukuki sonuç iddiası kullanılmayacak.
 
@@ -22,7 +22,7 @@ Ton sakin, kesin, ölçülü ve yönetici odaklı olacak. Teknik doğruluk korun
 
 ## Bilgi mimarisi
 
-1. **Üst alan:** Mustafa Kalkanlı adı, TR/EN dil seçimi ve bölüm navigasyonu.
+1. **Üst alan:** Mustafa Kalkanlı adı ve bölüm navigasyonu.
 2. **Hero:** Kısa değer önerisi, danışmanlık iletişimi çağrısı ve uzmanlığa inen ikincil çağrı.
 3. **Değer şeridi:** Risk görünürlüğü, önceliklendirilmiş yol haritası ve kurumsal dayanıklılık.
 4. **Ana çalışma alanları:**
@@ -42,7 +42,7 @@ Ton sakin, kesin, ölçülü ve yönetici odaklı olacak. Teknik doğruluk korun
 - Delil bütünlüğü, mümkün olduğunda salt-okunur edinim, hash ve işlem kaydı ilkeleri vurgulanacak.
 - “Delil teslim zinciri / chain of custody” gerektiği yerde doğru terimle kullanılacak.
 - Kesin fail isnadı, hukuki görüş, mahkemede kabul garantisi veya doğrulanmamış bilirkişilik/laboratuvar yetkinliği ima edilmeyecek.
-- Türkçe başlık **Adli Bilişim**, İngilizce başlık **Digital Forensics** olacak.
+- Türkçe başlık **Adli Bilişim** olacak.
 
 ## Görsel sistem
 
@@ -54,17 +54,18 @@ Ton sakin, kesin, ölçülü ve yönetici odaklı olacak. Teknik doğruluk korun
 - Görsel kimliği tipografi, çizgiler ve veri ilişkileri taşıyacak; fotoğraf gerekmeden güçlü görünmeli.
 - Hareket 450–700 ms aralığında, küçük ve amaçlı olacak; `prefers-reduced-motion` tam desteklenecek.
 
-## Çift dil davranışı
+## Dil davranışı
 
-- Kontrol `TR | EN` biçiminde açık durum gösterecek.
-- Dil tercihi yerel olarak korunacak ve sayfa yenilendiğinde kaybolmayacak.
-- Görünen metin, menü, CTA, erişilebilir ad, belge dili, başlık ve açıklama birlikte değişecek.
-- Türkçe ve İngilizce başlık satırları kendi dillerine göre ayrı dengelenecek.
-- Dil geçişi kullanıcının mevcut bölümünü değiştirmeyecek.
+- İlk sürümde dil kontrolü gösterilmeyecek.
+- Görünen metin, menü, CTA, erişilebilir ad, belge dili, başlık ve açıklama Türkçe olacak.
+- İçerik, cümle ve arayüz metinlerini anahtar bazında tutan `content/tr.json` sözlüğünde saklanacak; HTML içine dağılmayacak.
+- Sözlük; `meta`, `navigation`, `hero`, `valueStrip`, `services`, `scenarios`, `approach`, `forensics`, `principles`, `contact` ve `footer` alanlarından oluşacak.
+- Daha sonra aynı şemaya sahip `content/en.json` eklendiğinde tasarım ve bölüm yapısı değiştirilmeden İngilizce etkinleştirilebilecek.
 
 ## Teknik yaklaşım
 
-- React/Vinext içerik modeli tek kaynak olacak; statik Cloudflare çıktısı aynı kaynaktan üretilecek veya otomatik eşitlik testiyle korunacak.
+- `content/tr.json` tek içerik kaynağı olacak; üretim HTML'i bu sözlükten oluşturulacak.
+- Sözlük şeması ve gerekli anahtarlar otomatik test edilecek; görünür metinler HTML içinde ikinci kez elle tutulmayacak.
 - Yayına yalnızca gerekli statik dosyalar çıkacak; depo kaynaklarının tamamı yayın artefaktına eklenmeyecek.
 - Dış bağlantılarda `noopener noreferrer` korunacak.
 - Gereksiz istemci JavaScript'i ve ağır görseller kullanılmayacak.
@@ -80,7 +81,7 @@ Ton sakin, kesin, ölçülü ve yönetici odaklı olacak. Teknik doğruluk korun
 
 ## Kabul kriterleri
 
-- Türkçe ve İngilizce tüm içerik eksiksiz ve aynı ticari anlamda.
+- Tüm görünür ve erişilebilir içerik Türkçe.
 - Türkçe içerikte yalnızca **Adli Bilişim** terimi kullanılıyor.
 - Adli Bilişim ana uzmanlığın önüne geçmiyor.
 - Kanıtlanmamış kişisel veya ticari iddia bulunmuyor.
