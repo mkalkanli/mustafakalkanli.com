@@ -35,7 +35,7 @@
 
 **Interfaces:**
 - Produces: `npm run build:static` komutu ve yalnızca kamuya açık dosyaları içeren `dist/`.
-- Consumes: `content/tr.json`, `site/index.template.html`, `styles.css`, `script.js`, `robots.txt` ve `public/favicon.svg`.
+- Consumes: mevcut kök `index.html`, `styles.css`, `script.js`, `robots.txt` ve `public/favicon.svg`.
 
 - [ ] **Step 1: Yayın artefaktı için başarısız testi yaz**
 
@@ -63,7 +63,7 @@ Expected: FAIL; `dist/` eksik veya beklenmeyen sunucu dosyaları içeriyor.
 }
 ```
 
-`scripts/build-site.mjs`, sözlük değerlerini HTML-escape ederek şablondaki adlandırılmış alanlara yerleştirecek. `--preview` kök `index.html`; `--production` temiz bir `dist/` içinde `index.html`, `styles.css`, `script.js`, `robots.txt` ve `favicon.svg` üretecek. `.openai/hosting.json` içindeki statik dizini `dist` yap. GitHub Pages artefakt adımını `path: ./dist` olarak değiştir.
+`scripts/build-site.mjs` bu ilk görevde mevcut kök `index.html` dosyasını kullanacak. `--preview` kök dosyayı koruyacak; `--production` temiz bir `dist/` içinde `index.html`, `styles.css`, `script.js`, `robots.txt` ve `favicon.svg` üretecek. `.openai/hosting.json` içindeki statik dizini `dist` yap. GitHub Pages artefakt adımını `path: ./dist` olarak değiştir.
 
 - [ ] **Step 4: Derleme ve testleri doğrula**
 
@@ -82,6 +82,7 @@ git commit -m "build: isolate public website output"
 **Files:**
 - Create: `content/tr.json`
 - Create: `site/index.template.html`
+- Modify: `scripts/build-site.mjs`
 - Generate: `index.html`
 - Modify: `tests/site-source.test.ts`
 
@@ -110,7 +111,7 @@ Expected: FAIL; eski dil düğmesi veya eski terimler hâlâ mevcut.
 
 - [ ] **Step 3: Semantik Türkçe sayfa iskeletini yaz**
 
-`content/tr.json` içinde `meta`, `navigation`, `hero`, `valueStrip`, `services`, `scenarios`, `approach`, `forensics`, `principles`, `contact` ve `footer` alanlarını oluştur. `site/index.template.html` sırası: skip link → header → hero → değer şeridi → dört ana çalışma alanı → karar senaryoları → çalışma yaklaşımı → ikincil Adli Bilişim paneli → ilkeler → iletişim → footer. Hero ana metni “Siber riski, yönetilebilir kararlara dönüştürün.” olacak; isim dışında unvan eklenmeyecek. `npm run build:content` ile HTML'i üret.
+`content/tr.json` içinde `meta`, `navigation`, `hero`, `valueStrip`, `services`, `scenarios`, `approach`, `forensics`, `principles`, `contact` ve `footer` alanlarını oluştur. `site/index.template.html` sırası: skip link → header → hero → değer şeridi → dört ana çalışma alanı → karar senaryoları → çalışma yaklaşımı → ikincil Adli Bilişim paneli → ilkeler → iletişim → footer. Hero ana metni “Siber riski, yönetilebilir kararlara dönüştürün.” olacak; isim dışında unvan eklenmeyecek. `scripts/build-site.mjs` dosyasını sözlük değerlerini HTML-escape ederek şablondaki adlandırılmış alanlara yerleştirecek biçimde genişlet; `npm run build:content` ile HTML'i üret.
 
 - [ ] **Step 4: İçerik testini doğrula**
 
@@ -120,7 +121,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add content/tr.json site/index.template.html index.html tests/site-source.test.ts
+git add content/tr.json site/index.template.html scripts/build-site.mjs index.html tests/site-source.test.ts
 git commit -m "feat: add Turkish advisory content architecture"
 ```
 
