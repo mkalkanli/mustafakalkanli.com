@@ -102,7 +102,7 @@ void test('Turkish dictionary builds a temporary one-screen personal entrypoint'
   assert.doesNotMatch(index, /Siber Güvenlik Yönetimi ve Stratejisi/);
   assert.doesNotMatch(index, /<nav|id="yaklasim"|id="uzmanlik"|id="ilkeler"|id="iletisim"|decision-trace|value-strip|service-grid|scenario-grid|engagement-steps/);
   assert.match(index, /href="mailto:mk@mustafakalkanli\.com"/);
-  assert.match(css, /@media \(max-width: 560px\)/);
+  assert.match(css, /@media \(max-width: 700px\)/);
   assert.equal(cname.trim(), 'mustafakalkanli.com');
   assert.match(index, /name="robots" content="noindex, nofollow, noarchive"/);
   assert.match(robots, /Allow: \/$/m);
@@ -125,9 +125,13 @@ void test('temporary profile keeps the restrained responsive visual system', asy
   assert.match(css, /--ink:\s*#f2f0ea/i);
   assert.match(css, /--cobalt:\s*#6f9cff/i);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.match(css, /@media \(max-width: 560px\)/);
+  assert.match(css, /@media \(max-width: 700px\)/);
   assert.doesNotMatch(css, /letter-spacing:\s*-/);
   assert.match(css, /\.profile-card/);
+  assert.match(css, /\.profile-card ul\s*\{[^}]*position:\s*absolute;[^}]*top:/);
+  assert.match(css, /\.profile-card ul\s*\{[^}]*right:\s*0;/);
+  assert.match(css, /@media \(max-width: 700px\)[^{]*\{[\s\S]*\.profile-card ul\s*\{[^}]*position:\s*static;/);
+  assert.match(index, /class="security-art"[^>]*src="cybersecurity-core-v1\.png"/);
   assert.match(index, /href="#main-content"/);
   assert.match(index, /<script src="script\.js\?v=2" defer><\/script>/);
   assert.equal(content.profile.areas.length, 3);

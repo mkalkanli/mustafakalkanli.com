@@ -6,13 +6,15 @@ a { color: inherit; }
 a:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; }
 .skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 1; padding: 0.65rem 1rem; transform: translateY(-150%); background: var(--cobalt); color: #fff; font-weight: 700; }
 .skip-link:focus { transform: translateY(0); }
-.profile-card { width: min(46rem, calc(100% - 3rem)); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; margin-inline: auto; padding-block: 4rem; }
+.profile-card { position: relative; width: min(84rem, calc(100% - 4rem)); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; margin-inline: auto; padding-block: 4rem; }
 h1 { max-width: 12ch; margin: 0; font-family: var(--serif); font-size: clamp(3.5rem, 10vw, 7rem); font-weight: 600; letter-spacing: 0; line-height: 0.92; overflow-wrap: anywhere; }
-.profile-card ul { display: grid; gap: 0.6rem; margin: clamp(2.5rem, 7vw, 4.5rem) 0 0; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
+.security-art { position: absolute; inset: 50% auto auto 50%; z-index: 0; width: min(30vw, 24rem); height: auto; transform: translate(-50%, -50%); opacity: 0.82; object-fit: contain; }
+.profile-card h1, .profile-card ul, .email-link { position: relative; z-index: 1; }
+.profile-card ul { position: absolute; top: 3rem; right: 0; width: min(25rem, 32vw); display: grid; gap: 0.6rem; margin: 0; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
 .profile-card li { padding: 0.85rem 0; border-bottom: 1px solid var(--line); color: var(--quiet); font-family: var(--mono); font-size: clamp(0.9rem, 1.8vw, 1rem); letter-spacing: 0.02em; }
 .profile-card li:last-child { color: var(--ink); }
 .email-link { width: fit-content; min-height: 44px; margin-top: clamp(2.5rem, 7vw, 4.5rem); padding: 0.75rem 0; border-bottom: 2px solid var(--cobalt); color: var(--ink); font-size: 1.05rem; font-weight: 750; text-decoration: none; }
 .email-link:hover { color: var(--cobalt); }
 @media (prefers-reduced-motion: no-preference) { html.motion-ready [data-reveal] { opacity: 0; transform: translateY(1rem); transition: opacity 360ms ease, transform 360ms ease; } html.motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0); } }
-@media (max-width: 560px) { .profile-card { width: min(100% - 2rem, 46rem); padding-block: 3rem; } h1 { font-size: clamp(3rem, 17vw, 4.75rem); } }
+@media (max-width: 700px) { .profile-card { width: min(100% - 2rem, 46rem); justify-content: flex-start; padding-block: 3rem; } h1 { font-size: clamp(3rem, 17vw, 4.75rem); } .security-art { position: relative; inset: auto; width: min(72vw, 20rem); margin: 1.5rem auto; transform: none; } .profile-card ul { position: static; width: 100%; margin-top: 0.5rem; } .email-link { margin-top: 2rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; } }
