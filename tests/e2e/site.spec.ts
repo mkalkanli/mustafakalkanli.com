@@ -74,8 +74,11 @@ test('renders a Turkish-only one-screen personal entrypoint with non-indexable c
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(0);
   await expect(page.locator('.security-art')).toBeVisible();
   if ((page.viewportSize()?.width ?? 0) <= 700) {
+    await expect(page.locator('.expertise-menu')).not.toHaveAttribute('open', '');
+    await expect(page.locator('.footer-separator')).toBeHidden();
     await expect(page.getByText('Siber Güvenlik', { exact: true })).toBeHidden();
     await page.getByText('Menü', { exact: true }).click();
+    await expect(page.locator('.expertise-menu')).toHaveAttribute('open', '');
   }
   await expect(page.getByText('Siber Güvenlik', { exact: true })).toBeVisible();
   await expect(page.getByText('Bilgi Güvenliği', { exact: true })).toBeVisible();
@@ -93,6 +96,42 @@ test('renders a Turkish-only one-screen personal entrypoint with non-indexable c
   );
   await expect(page.locator('body')).not.toContainText('Digital Forensics');
   await expect(page.locator('body')).not.toContainText('English');
+});
+
+test('keeps the desktop expertise rail and shield optically centered', async ({ page }) => {
+  test.skip((page.viewportSize()?.width ?? 0) <= 700, 'Desktop composition only.');
+  await page.goto('/');
+  await waitForStablePage(page);
+
+  await expect(page.getByText('Menü', { exact: true })).toBeHidden();
+  await expect(page.locator('.expertise-menu')).toHaveAttribute('open', '');
+
+  const layout = await page.evaluate(() => {
+    const shield = document.querySelector('.security-art')?.getBoundingClientRect();
+    const rail = document.querySelector('.expertise-menu ul')?.getBoundingClientRect();
+    const footer = document.querySelector('.site-footer')?.getBoundingClientRect();
+    if (!shield || !rail || !footer) throw new Error('Expected layout elements');
+    return {
+      shieldWidth: shield.width,
+      shieldCenter: shield.left + shield.width / 2,
+      railCenter: rail.left + rail.width / 2,
+      footerCenter: footer.left + footer.width / 2,
+      viewportCenter: window.innerWidth / 2,
+      viewportHeight: window.innerHeight,
+      pageHeight: document.documentElement.scrollHeight,
+      transform: getComputedStyle(document.querySelector('.security-art')!).transform,
+    };
+  });
+
+  const heightConstrainedWidth = ((layout.viewportHeight - 216) * 2) / 3;
+  const expectedShieldWidth = Math.min(576, heightConstrainedWidth);
+  expect(layout.shieldWidth).toBeGreaterThanOrEqual(expectedShieldWidth - 1);
+  expect(layout.shieldWidth).toBeLessThanOrEqual(576);
+  expect(Math.abs(layout.shieldCenter - layout.viewportCenter)).toBeLessThanOrEqual(1);
+  expect(Math.abs(layout.railCenter - layout.shieldCenter)).toBeLessThanOrEqual(1);
+  expect(Math.abs(layout.footerCenter - layout.viewportCenter)).toBeLessThanOrEqual(1);
+  expect(layout.pageHeight).toBeLessThanOrEqual(layout.viewportHeight + 1);
+  expect(layout.transform).toBe('none');
 });
 
 test('supports keyboard navigation with visible focus states and skip navigation', async ({
