@@ -95,8 +95,8 @@ void test('Turkish dictionary builds a temporary one-screen personal entrypoint'
   ]);
   assert.equal(content.contact.email, 'mk@mustafakalkanli.com');
   assert.doesNotMatch(index, /Digital Forensics|data-i18n|language-button/);
-  assert.match(index, /<script src="script\.js\?v=12" defer><\/script>/);
-  assert.match(index, /href="styles\.css\?v=12"/);
+  assert.match(index, /<script src="script\.js\?v=13" defer><\/script>/);
+  assert.match(index, /href="styles\.css\?v=13"/);
   assert.doesNotMatch(index, /<h1|id="hero-title"/);
   assert.match(index, /Siber Güvenlik[\s\S]*Bilgi Güvenliği[\s\S]*Adli Bilişim/);
   assert.doesNotMatch(index, /Siber Güvenlik Yönetimi ve Stratejisi/);
@@ -134,7 +134,7 @@ void test('temporary profile keeps the restrained responsive visual system', asy
   assert.match(css, /\.site-footer/);
   assert.match(css, /\.site-footer\s*\{[^}]*justify-content:\s*center;/);
   assert.match(css, /\.security-art\s*\{[^}]*width:\s*clamp\(34rem,\s*40vw,\s*36rem\)[^}]*max-height:\s*calc\(100svh - 13\.5rem\)/);
-  assert.match(css, /\.security-art\s*\{[^}]*transform:\s*none/);
+  assert.match(css, /\.security-art\s*\{[^}]*transform:\s*translateY\(2rem\)/);
   assert.match(index, /class="security-art"[^>]*src="cybersecurity-shield-v4\.png"/);
   assert.match(index, /<details class="expertise-menu" open>[\s\S]*<summary>Menü<\/summary>/);
   assert.match(css, /\.expertise-menu\s*\{[^}]*top:\s*2rem;[^}]*left:\s*50%;/);
@@ -143,7 +143,7 @@ void test('temporary profile keeps the restrained responsive visual system', asy
   assert.match(css, /\.expertise-menu summary\s*\{\s*display:\s*none;/);
   assert.match(css, /@media \(max-width: 700px\)[\s\S]*\.expertise-menu summary\s*\{[^}]*display:\s*flex;/);
   assert.match(index, /href="#main-content"/);
-  assert.match(index, /<script src="script\.js\?v=12" defer><\/script>/);
+  assert.match(index, /<script src="script\.js\?v=13" defer><\/script>/);
   assert.equal(content.profile.areas.length, 3);
   assert.match(script, /is-visible/);
   assert.match(script, /prefers-reduced-motion/);

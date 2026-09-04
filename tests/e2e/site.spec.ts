@@ -131,7 +131,41 @@ test('keeps the desktop expertise rail and shield optically centered', async ({ 
   expect(Math.abs(layout.railCenter - layout.shieldCenter)).toBeLessThanOrEqual(1);
   expect(Math.abs(layout.footerCenter - layout.viewportCenter)).toBeLessThanOrEqual(1);
   expect(layout.pageHeight).toBeLessThanOrEqual(layout.viewportHeight + 1);
-  expect(layout.transform).toBe('none');
+});
+
+test('centers the desktop shield between the expertise and footer rules', async ({
+  page,
+}) => {
+  test.skip(
+    (page.viewportSize()?.width ?? 0) <= 700,
+    'Desktop composition only.',
+  );
+  await page.goto('/');
+  await waitForStablePage(page);
+
+  const centers = await page.evaluate(() => {
+    const shield = document
+      .querySelector('.security-art')
+      ?.getBoundingClientRect();
+    const expertiseRule = document
+      .querySelector('.expertise-menu ul')
+      ?.getBoundingClientRect();
+    const footerRule = document
+      .querySelector('.site-footer')
+      ?.getBoundingClientRect();
+    if (!shield || !expertiseRule || !footerRule) {
+      throw new Error('Expected desktop layout elements');
+    }
+
+    return {
+      shield: shield.top + shield.height / 2,
+      spaceBetweenRules: (expertiseRule.bottom + footerRule.top) / 2,
+    };
+  });
+
+  expect(
+    Math.abs(centers.shield - centers.spaceBetweenRules),
+  ).toBeLessThanOrEqual(1);
 });
 
 test('supports keyboard navigation with visible focus states and skip navigation', async ({
